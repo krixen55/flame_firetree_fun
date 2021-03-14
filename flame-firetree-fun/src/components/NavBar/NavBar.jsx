@@ -15,7 +15,7 @@ class NavBar extends Component {
     console.log(this.props.access_token);
     return (
       <div>
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" expand="lg">
           <div className="navbar-header">
             <Navbar.Brand as={Link} to="/">
               <div style={{ display: "flex", alignItems: "center" }}>

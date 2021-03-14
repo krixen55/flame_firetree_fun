@@ -5,7 +5,15 @@ class AboutUs extends Component {
 
   render() {
     return (
-      <div class="text-center">
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+          backgroundColor: "darkgray",
+        }}
+        class="text-center"
+      >
         <p>
           Hello There! My name is Victor and thank you for checking out my World
           of Warcraft Checker.

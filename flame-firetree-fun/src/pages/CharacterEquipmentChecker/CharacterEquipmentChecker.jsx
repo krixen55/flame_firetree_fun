@@ -51,6 +51,7 @@ class CharacterEquipmentChecker extends Component {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
+          backgroundColor: "darkgray",
         }}
       >
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -85,11 +86,6 @@ class CharacterEquipmentChecker extends Component {
             </Form.Group>
           </Form>
         </div>
-        <div style={{ marginTop: 10 }}>
-          {this.state.equipmentBool ? (
-            <EquipmentTable equipmentData={this.state.equipmentData} />
-          ) : null}
-        </div>
         <div
           style={{
             display: "flex",
@@ -98,12 +94,18 @@ class CharacterEquipmentChecker extends Component {
         >
           <button
             type="button"
-            class="btn btn-primary btn-lg w-20"
+            class="btn btn-dark btn-lg w-20"
             onClick={this.get_equipment}
           >
             Check!
           </button>
         </div>
+        <div style={{ marginTop: 10 }}>
+          {this.state.equipmentBool ? (
+            <EquipmentTable equipmentData={this.state.equipmentData} />
+          ) : null}
+        </div>
+
         {/* <div>
           <Dropdown title drop>
             <Dropdown.Toggle variant="success" id="dropdown-basic">

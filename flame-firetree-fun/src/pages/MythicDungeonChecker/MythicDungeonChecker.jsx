@@ -42,10 +42,11 @@ class MythicDungeonChecker extends Component {
           display: "flex",
           justifyContent: "center",
           flexDirection: "column",
+          backgroundColor: "darkgray",
         }}
       >
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <h1>Guild +15 Checker</h1>
+          <h1>Guild Dungeon Checker</h1>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <h3>
@@ -79,12 +80,6 @@ class MythicDungeonChecker extends Component {
             </Form.Group>
           </Form>
         </div>
-
-        <div style={{ marginTop: 10 }}>
-          {this.state.roster_fetch ? (
-            <MythicTable roster_data={this.state.roster_data} />
-          ) : null}
-        </div>
         <div
           style={{
             display: "flex",
@@ -93,11 +88,16 @@ class MythicDungeonChecker extends Component {
         >
           <button
             type="button"
-            class="btn btn-primary btn-lg w-20"
+            class="btn btn-dark btn-lg w-20"
             onClick={this.get_roster}
           >
             Check!
           </button>
+        </div>
+        <div style={{ marginTop: 10 }}>
+          {this.state.roster_fetch ? (
+            <MythicTable roster_data={this.state.roster_data} />
+          ) : null}
         </div>
       </div>
     );

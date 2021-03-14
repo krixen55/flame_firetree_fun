@@ -35,7 +35,13 @@ class EquipmentTable extends Component {
 
   render() {
     return (
-      <BootstrapTable ref="table" data={this.state.tableBody} version="4">
+      <BootstrapTable
+        ref="table"
+        data={this.state.tableBody}
+        striped
+        hover
+        tableStyle={{ background: "#a9a9a9" }}
+      >
         <TableHeaderColumn dataField="name" isKey={true} dataSort={true}>
           Name
         </TableHeaderColumn>
