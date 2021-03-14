@@ -5,7 +5,9 @@ import Cookies from "js-cookie";
 var BNET_ID = "2f921dc15b264080b0d4aa5d82414475";
 var BNET_SECRET = "fKeHKEG0UlXRrfxx424o5rFjeojGPOHU";
 var BNET_TOKEN_URI = "https://us.battle.net/oauth/token";
+// eslint-disable-next-line
 var BNET_AUTH_URI = "	https://us.battle.net/oauth/authorize";
+// eslint-disable-next-line
 var BNET_SCOPES = ["wow.profile"];
 
 class Login extends Component {

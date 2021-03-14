@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import { Table } from "react-bootstrap";
+
 import { BootstrapTable, TableHeaderColumn } from "react-bootstrap-table";
 
 class MythicTable extends Component {
-  constructor(props) {
-    super(props);
-  }
   state = {
     tableBody: [],
     tableBodyReady: false,
@@ -44,7 +41,7 @@ class MythicTable extends Component {
       .then((response) => response.json())
       .then((res) => {
         console.log(res);
-        if (res.statusCode != 400) {
+        if (res.statusCode !== 400) {
           didTheyDoIt = this.checkForFifteen(res);
           this.setState({
             tableBody: this.state.tableBody.concat({
@@ -59,6 +56,7 @@ class MythicTable extends Component {
   };
 
   renderCharacter = (char, index) => {
+    // eslint-disable-next-line
     var didTheyDoIt = false;
     if (char.rank > 6 || char.character.level < 50) {
       return null;

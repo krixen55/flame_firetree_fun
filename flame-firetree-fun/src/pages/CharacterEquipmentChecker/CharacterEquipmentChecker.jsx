@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 // import "./MythicDungeonChecker.css";
-import Cookies from "js-cookie";
+
 import EquipmentTable from "../../components/EquipmentTable/EquipmentTable";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+// import Dropdown from "popper.js";
+
 class CharacterEquipmentChecker extends Component {
   state = {
     serverName: " ",
@@ -102,6 +104,19 @@ class CharacterEquipmentChecker extends Component {
             Check!
           </button>
         </div>
+        {/* <div>
+          <Dropdown title drop>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              Dropdown Button
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div> */}
       </div>
     );
   }

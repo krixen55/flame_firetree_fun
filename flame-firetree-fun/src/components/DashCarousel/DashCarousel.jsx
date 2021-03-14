@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Carousel, Image } from "react-bootstrap";
-import { BrowserView, MobileView, isMobile } from "react-device-detect";
+import { Carousel } from "react-bootstrap";
+import { BrowserView, MobileView } from "react-device-detect";
 import "./DashCarousel.css";
 
 const textLightBg = {

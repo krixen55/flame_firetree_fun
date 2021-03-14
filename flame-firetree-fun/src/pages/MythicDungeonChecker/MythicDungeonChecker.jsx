@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import "./MythicDungeonChecker.css";
-import Cookies from "js-cookie";
+
 import MythicTable from "../../components/MythicTable/MythicTable";
-import { Form, Button } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 class MythicDungeonChecker extends Component {
   state = {
     roster_data: {},
