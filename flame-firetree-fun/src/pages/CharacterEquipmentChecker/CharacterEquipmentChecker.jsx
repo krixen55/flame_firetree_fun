@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 // import "./MythicDungeonChecker.css";
-
+import Select from "react-select";
 import EquipmentTable from "../../components/EquipmentTable/EquipmentTable";
 import { Form } from "react-bootstrap";
-// import Dropdown from "popper.js";
 
 class CharacterEquipmentChecker extends Component {
   state = {
@@ -11,10 +10,11 @@ class CharacterEquipmentChecker extends Component {
     characterName: " ",
     equipmentData: [],
     equipmentBool: false,
+    realms: [{}],
   };
 
   handleServerChange = (event) => {
-    this.setState({ serverName: event.target.value });
+    //this.setState({ serverName: event.target.value });
   };
   handleNameChange = (event) => {
     this.setState({ characterName: event.target.value });
@@ -23,9 +23,11 @@ class CharacterEquipmentChecker extends Component {
   //creating the character equipment API
 
   get_equipment = async () => {
+    console.log(this.state.serverName);
     fetch(
       "https://us.api.blizzard.com/profile/wow/character/" +
-        this.state.serverName.toLowerCase().replace("'", "").replace(" ", "-") +
+        // this.state.serverName.toLowerCase().replace("'", "").replace(" ", "-") +
+        this.state.serverName +
         "/" +
         this.state.characterName
           .toLowerCase()
@@ -44,7 +46,42 @@ class CharacterEquipmentChecker extends Component {
         console.log(res);
       });
   };
+
+  // beginning of dropdown table loop, utilizing API call to get realm name
+  getServerNames = async () => {
+    fetch(
+      "https://us.api.blizzard.com/data/wow/realm/index?namespace=dynamic-us&locale=en_US&access_token=" +
+        this.props.token
+    )
+      .then((response) => response.json())
+
+      .then((res) => {
+        const temprealmlist = [];
+        for (var i = 0; i < res.realms.length; i++) {
+          const temprealmdict = {};
+          temprealmdict["value"] = res.realms[i].slug;
+          temprealmdict["label"] = res.realms[i].name;
+
+          temprealmlist.push(temprealmdict);
+        }
+        this.setState({
+          realms: temprealmlist,
+        });
+
+        console.log(res);
+      });
+  };
+  componentDidMount() {
+    this.getServerNames();
+  }
+
   render() {
+    const styles = {
+      container: (base) => ({
+        ...base,
+        flex: 1,
+      }),
+    };
     return (
       <div
         style={{
@@ -52,6 +89,7 @@ class CharacterEquipmentChecker extends Component {
           justifyContent: "center",
           flexDirection: "column",
           backgroundColor: "darkgray",
+          height: "auto",
         }}
       >
         <div style={{ display: "flex", justifyContent: "center" }}>
@@ -67,15 +105,20 @@ class CharacterEquipmentChecker extends Component {
           }}
         >
           <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Server Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="serverName"
-                onChange={this.handleServerChange}
-              />
-            </Form.Group>
-
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <div style={{ display: "flex", width: "100%" }}>
+                <Select
+                  options={this.state.realms}
+                  styles={styles}
+                  onChange={(opt) => this.setState({ serverName: opt.value })}
+                />
+              </div>
+            </div>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Character Name</Form.Label>
               <Form.Control
@@ -105,20 +148,6 @@ class CharacterEquipmentChecker extends Component {
             <EquipmentTable equipmentData={this.state.equipmentData} />
           ) : null}
         </div>
-
-        {/* <div>
-          <Dropdown title drop>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-              Dropdown Button
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-              <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-              <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-        </div> */}
       </div>
     );
   }

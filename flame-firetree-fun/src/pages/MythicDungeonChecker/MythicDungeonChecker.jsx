@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import "./MythicDungeonChecker.css";
-
+import Select from "react-select";
 import MythicTable from "../../components/MythicTable/MythicTable";
 import { Form } from "react-bootstrap";
+
 class MythicDungeonChecker extends Component {
   state = {
     roster_data: {},
@@ -10,12 +11,13 @@ class MythicDungeonChecker extends Component {
     serverName: " ",
     guildName: " ",
     characterName: " ",
+    realms: [{}],
   };
   // Victor Ly
   get_roster = async () => {
     await fetch(
       "https://us.api.blizzard.com/data/wow/guild/" +
-        this.state.serverName.toLowerCase().replace("'", "").replace(" ", "-") +
+        this.state.serverName +
         "/" +
         this.state.guildName.toLowerCase().replace(" ", "-") +
         "/roster?namespace=profile-us&locale=en_US&access_token=" +
@@ -28,6 +30,32 @@ class MythicDungeonChecker extends Component {
         console.log(res);
       });
   };
+  getServerNames = async () => {
+    fetch(
+      "https://us.api.blizzard.com/data/wow/realm/index?namespace=dynamic-us&locale=en_US&access_token=" +
+        this.props.token
+    )
+      .then((response) => response.json())
+
+      .then((res) => {
+        const temprealmlist = [];
+        for (var i = 0; i < res.realms.length; i++) {
+          const temprealmdict = {};
+          temprealmdict["value"] = res.realms[i].slug;
+          temprealmdict["label"] = res.realms[i].name;
+
+          temprealmlist.push(temprealmdict);
+        }
+        this.setState({
+          realms: temprealmlist,
+        });
+
+        console.log(res);
+      });
+  };
+  componentDidMount() {
+    this.getServerNames();
+  }
 
   handleChange = (event) => {
     let obj = {};
@@ -36,6 +64,12 @@ class MythicDungeonChecker extends Component {
   };
 
   render() {
+    const styles = {
+      container: (base) => ({
+        ...base,
+        flex: 1,
+      }),
+    };
     return (
       <div
         style={{
@@ -61,15 +95,13 @@ class MythicDungeonChecker extends Component {
           }}
         >
           <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Server Name</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="serverName"
-                onChange={this.handleChange}
+            <div style={{ display: "flex", width: "100%" }}>
+              <Select
+                options={this.state.realms}
+                styles={styles}
+                onChange={(opt) => this.setState({ serverName: opt.value })}
               />
-            </Form.Group>
-
+            </div>
             <Form.Group controlId="formBasicPassword">
               <Form.Label>Guild Name</Form.Label>
               <Form.Control
