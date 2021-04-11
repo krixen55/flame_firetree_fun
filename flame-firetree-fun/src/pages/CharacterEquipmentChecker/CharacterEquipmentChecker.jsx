@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-// import "./MythicDungeonChecker.css";
+
 import Select from "react-select";
 import EquipmentTable from "../../components/EquipmentTable/EquipmentTable";
 import { Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
+import shadowlandsimg from "../../assets/shadowlandsimg.jpg";
 
 class CharacterEquipmentChecker extends Component {
   state = {
@@ -92,12 +94,22 @@ class CharacterEquipmentChecker extends Component {
           height: "auto",
         }}
       >
+        <Container fluid>
+          <figure className="position-relative">
+            <img
+              src={shadowlandsimg}
+              alt="shadowlandsimg"
+              className="img-fluid"
+            />
+          </figure>
+        </Container>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <h1>Character Checker</h1>
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <h3>This tool checks a player's equipment</h3>
         </div>
+
         <div
           style={{
             display: "flex",
@@ -105,6 +117,7 @@ class CharacterEquipmentChecker extends Component {
           }}
         >
           <Form>
+            <Form.Label>Server Name</Form.Label>
             <div
               style={{
                 display: "flex",

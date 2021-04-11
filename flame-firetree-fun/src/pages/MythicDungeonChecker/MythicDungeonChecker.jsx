@@ -95,6 +95,7 @@ class MythicDungeonChecker extends Component {
           }}
         >
           <Form>
+            <Form.Label>Server Name</Form.Label>
             <div style={{ display: "flex", width: "100%" }}>
               <Select
                 options={this.state.realms}

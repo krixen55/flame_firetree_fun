@@ -7,6 +7,7 @@ import MythicDungeonChecker from "../../pages/MythicDungeonChecker/MythicDungeon
 import CharacterEquipmentChecker from "../../pages/CharacterEquipmentChecker/CharacterEquipmentChecker";
 import Dashboard from "../../pages/Dashboard/Dashboard";
 import AboutUs from "../../pages/AboutUs/AboutUs";
+import wowicon from "../../assets/wowicon.png";
 
 class NavBar extends Component {
   componentDidMount() {}
@@ -25,6 +26,12 @@ class NavBar extends Component {
         <div style={{ height: "auto", width: "100vw" }}>
           <Navbar bg="dark" expand="lg">
             <div className="navbar-header">
+              <img
+                src={wowicon}
+                width="70"
+                height="70"
+                className="d-inline-block align-top"
+              />
               <Navbar.Brand as={Link} to="/">
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <div style={{ marginLeft: 5 }}>
